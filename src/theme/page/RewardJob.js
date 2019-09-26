@@ -70,7 +70,7 @@ export default class RewardJob extends Component {
                                 source={{
                                     uri: item.logo,
                                 }}
-                                style={{width:'50%',height:'50%'}}
+                                style={{width:'50%',height:'50%',borderRadius:50}}
 
                             />
                         </View>
