@@ -171,6 +171,7 @@ const Menu = createBottomTabNavigator(
 
 
         }),
+        initialRouteName: 'Home',
         tabBarOptions: {
             activeTintColor: '#0a11f0'
             , inactiveTintColor: 'gray',
