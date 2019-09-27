@@ -76,6 +76,7 @@ const Menu = createBottomTabNavigator(
         Home: {
             screen: HomeStack,
             navigationOptions:{
+
             }
         },
         More: {
@@ -173,6 +174,7 @@ const Menu = createBottomTabNavigator(
         }),
         initialRouteName: 'Home',
         tabBarOptions: {
+
             activeTintColor: '#0a11f0'
             , inactiveTintColor: 'gray',
         },
