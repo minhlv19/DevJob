@@ -13,7 +13,7 @@ import {
     RefreshControl,
 } from 'react-native';
 import {concat} from 'react-native-reanimated';
-import {small_bold} from '../../asset/styles/styleText';
+import {mini, small_bold} from '../../asset/styles/styleText';
 //import all the components we are going to use.
 export default class FeatureJob extends Component {
     constructor(props) {
@@ -26,26 +26,27 @@ export default class FeatureJob extends Component {
 
         this.componentDidMount();
     }
-componentDidMount(){
+
+    componentDidMount() {
 
         return fetch(
-          'https://devjob.co/api/home?token=0F405C9DD1DE1021140B07B8CE534693'
+            'https://devjob.co/api/home?token=0F405C9DD1DE1021140B07B8CE534693',
         )
             .then(response => response.json())
-            .then((responseJson)=> {
+            .then((responseJson) => {
                 this.setState({
-                    refreshing:false,
-                    dataSource:responseJson.jobs_feature.map(e =>{
-                        responseJson.locations.forEach(item =>{
-                            if(e.location_id==item.id){
-                                e['location_name']=item.name
+                    refreshing: false,
+                    dataSource: responseJson.jobs_feature.map(e => {
+                        responseJson.locations.forEach(item => {
+                            if (e.location_id == item.id) {
+                                e['location_name'] = item.name;
                             }
 
                         });
-                        return e
-                    })
+                        return e;
+                    }),
 
-                })
+                });
 
 
             })
@@ -69,7 +70,7 @@ componentDidMount(){
 
     onRefresh() {
         //Clear old data of the list
-        this.setState({  dataSource: []});
+        this.setState({dataSource: []});
         //Call the Service to get the latest data
         this.componentDidMount();
     }
@@ -103,16 +104,23 @@ componentDidMount(){
                                 <Text style={styles.title}>
                                     {item.title}
                                 </Text>
-                                <Text>
-                                    {item.address}
-                                </Text>
-                                <Text>
-                                    {item.name}
-                                </Text>
-                                <View style={{flex:1,flexDirection:'row',}}>
+                                <View style={styles.styleicon}>
+                                    <Image source={require('../../asset/image/companyitem.png')}
+                                           style={styles.imageitem}/>
+                                    <Text style={styles.textname}>
+
+                                        {item.name}
+                                    </Text>
+                                </View>
+                                <View style={styles.styleicon}>
+                                    <Image source={require('../../asset/image/location.png')} style={styles.imageitem}/>
                                     <Text>{item.location_name}
                                     </Text>
-                                        {item.skills.map(e=><Text key={e.name}>{e.name}</Text>)}
+
+                                </View>
+
+                                <View style={styles.styleicon}>
+                                    {item.skills.map(e => <Text style={styles.skill} key={e.name}>{e.name}</Text>)}
                                 </View>
                             </View>
                         </View>
@@ -141,21 +149,50 @@ const styles = StyleSheet.create({
         fontSize: 20,
         padding: 10,
         flex: 1,
-        flexDirection:'row',
-        marginBottom:3,
-        borderWidth:1,
-        borderRadius:10,
+        flexDirection: 'row',
+        marginBottom: 3,
+        borderWidth: 1,
+        borderRadius: 10,
         alignItems: 'center',
     },
-    logoimage:{
-        width: 100, height: 100,alignItems: 'center',
+    logoimage: {
+        width: 100, height: 100, alignItems: 'center',
     },
-    body:{
-        flex:1,justifyContent: 'center',marginLeft:'8%',
+    body: {
+        flex: 1, justifyContent: 'center', marginLeft: '8%',
     },
-    title:{
+    title: {
         fontSize: 16,
-        ...small_bold
+        ...small_bold,
+    },
+    styleicon: {
+        marginTop: 6,
+        flexDirection: 'row',
+        alignItems: 'center',
+
+    },
+    imageitem: {
+        width: 16,
+        height: 16,
+        padding: 8,
+    },
+    textname: {
+        width: '88%',
+        writingDirection: 'auto',
+        ...mini,
+    },
+    skill: {
+        width: '22%',
+        writingDirection: 'auto',
+        ...mini,
+        flexDirection: 'row',
+        borderWidth: 1,
+        borderRadius: 5,
+        borderColor: '#3e79ff',
+        textAlign: 'center',
+        color: '#3e79ff',
+
+
     },
 });
 
