@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {ActivityIndicator, FlatList, Image, RefreshControl, StyleSheet, Text, View} from 'react-native';
-import {diff} from 'react-native-reanimated';
+import {FlatList, ActivityIndicator, Text, View, Image, StyleSheet, RefreshControl} from 'react-native';
+import {Card} from 'react-native-elements';
 import {mini, small_bold} from '../../asset/styles/styleText';
 
-class JobsScreen extends Component {
+
+export default class RewardJob extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,33 +15,39 @@ class JobsScreen extends Component {
     }
 
     componentDidMount() {
-        return fetch(
-            'https://devjob.co/api/job/job-listings?token=0F405C9DD1DE1021140B07B8CE534693',
-        )
-            .then(response => response.json())
+        return fetch('https://devjob.co/api/home?token=0F405C9DD1DE1021140B07B8CE534693')
+            .then((response) => response.json())
             .then((responseJson) => {
-                this.setState({
-                    refreshing: false,
-                    dataSource: responseJson.jobs.data.map(e => {
-                        responseJson.countSkill.forEach(item => {
-                            if (e.cate_id == item.cate_id) {
-                                e['skill'] = item.name;
-                            }
-                        });
-                        return e;
-                    }),
+                    console.log(responseJson);
 
-                });
+                    this.setState({
+                        refreshing: false,
+                        dataSource: responseJson.jobs_reward.map(e => {
+
+                                responseJson.locations.forEach(item => {
+                                    if (e.location_id == item.id) {
+                                        e['location_name'] = item.name;
+                                    }
+                                });
 
 
-            })
-            .catch(error => {
+                                return e;
+                            },
+                        ),
+
+
+                    }, function () {
+
+                    });
+
+                },
+            )
+            .catch((error) => {
                 console.error(error);
             });
 
+
     }
-
-
     onRefresh() {
         //Clear old data of the list
         this.setState({dataSource: []});
@@ -48,20 +55,23 @@ class JobsScreen extends Component {
         this.componentDidMount();
     }
 
+
     render() {
+
         if (this.state.refreshing) {
             return (
-                <View style={{flex: 1, padding: 20}}>
+                //loading view while data is loading
+                <View style={{flex: 1, paddingTop: 20}}>
                     <ActivityIndicator/>
                 </View>
             );
         }
 
         return (
-
             <View style={styles.container}>
                 <FlatList
-
+                    // onRefresh={() => this.onRefresh()}
+                    // refreshing={this.state.isFetching}
                     data={this.state.dataSource}
 
                     keyExtractor={(item, index) => index.toString()}
@@ -87,30 +97,18 @@ class JobsScreen extends Component {
                             <View style={styles.styleicon}>
                                 <Image source={require('../../asset/image/companyitem.png')} style={styles.imageitem}/>
                                 <Text style={styles.textname}>
-                                    {item.name_company}
+                                    {item.name}
                                 </Text>
                             </View>
 
                             <View style={styles.styleicon}>
                                 <Image source={require('../../asset/image/location.png')} style={styles.imageitem}/>
 
-                                <Text style={styles.textname}>{item.address_job}</Text>
+                                <Text style={styles.textname}>{item.location_name}</Text>
                             </View>
                             <View style={styles.styleicon}>
-                                <Image source={require('../../asset/image/money.png')} style={styles.imageitem}/>
-
-                                <Text style={styles.textname}>{item.salary_min} - {item.salary_max}</Text>
+                                {item.skills.map(e => <Text key={e.name} style={styles.skill}>#{e.name}</Text>)}
                             </View>
-                            <View style={styles.styleicon}>
-                                <Image source={require('../../asset/image/bonus.png')} style={styles.imageitem}/>
-
-                                <Text style={styles.textname}>{item.bonus}</Text>
-                            </View>
-                            <View style={styles.styleicon}>
-
-                                <Text  style={styles.skills}>{item.skill}</Text>
-                            </View>
-
                         </View>
                     </View>}
                     refreshControl={
@@ -163,10 +161,9 @@ const styles = StyleSheet.create({
         width: '88%',
         writingDirection: 'auto',
         ...mini,
-        color: '#3e79ff',
     },
-    skills: {
-        width: 'auto',
+    skill: {
+        width: '22%',
         writingDirection: 'auto',
         ...mini,
         flexDirection: 'row',
@@ -175,8 +172,6 @@ const styles = StyleSheet.create({
         borderColor: '#3e79ff',
         textAlign: 'center',
         color: '#3e79ff',
-        margin:4,
-        padding:4
 
 
     },
@@ -201,19 +196,9 @@ const styles = StyleSheet.create({
         width: 100,
         height: 80,
         alignItems: 'center'
-    },
-    skill: {
-        width: '22%',
-        writingDirection: 'auto',
-        ...mini,
-        flexDirection: 'row',
-        borderWidth: 1,
-        borderRadius: 5,
-        borderColor: '#3e79ff',
-        textAlign: 'center',
-        color: '#3e79ff',
-
-
-    },
+    }
 });
-export default JobsScreen;
+
+
+
+

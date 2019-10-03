@@ -9,6 +9,8 @@ import MoreScreen from '../menu/MoreScreen';
 import CompaniesScreen from '../menu/CompaniesScreen';
 import JobsScreen from '../menu/JobsScreen';
 
+
+
 const HomeStack = createStackNavigator(
     {
         Home: {
@@ -172,7 +174,7 @@ const Menu = createBottomTabNavigator(
 
 
         }),
-        initialRouteName: 'Home',
+        initialRouteName: 'More',
         tabBarOptions: {
 
             activeTintColor: '#0a11f0'
@@ -180,6 +182,7 @@ const Menu = createBottomTabNavigator(
         },
     },
 );
+
 const Mian = createStackNavigator(
     {
         Menu: {
@@ -187,6 +190,7 @@ const Mian = createStackNavigator(
                 header: null,
             },
         },
+
     },
     {initialRouteName: 'Menu', headerLayoutPreset: 'center'},
 );

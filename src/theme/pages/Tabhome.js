@@ -1,22 +1,22 @@
-import {createAppContainer,} from 'react-navigation';
-import {createMaterialTopTabNavigator,} from 'react-navigation-tabs';
+import {createAppContainer} from 'react-navigation';
+import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
-import FeatureJob from '../page/FeatureJob';
-import RewardJob from '../page/RewardJob';
+import FeatureJob from './/FeatureJob';
+import RewardJob from './/RewardJob';
 
 const TabScreen = createMaterialTopTabNavigator(
     {
         RewardJob: {
             screen: RewardJob,
-            navigationOptions:{
-                tabBarLabel:"Reward Job",
+            navigationOptions: {
+                tabBarLabel: 'Reward Job',
             },
 
         },
         FeatureJob: {
             screen: FeatureJob,
-            navigationOptions:{
-                tabBarLabel:"Feature Job",
+            navigationOptions: {
+                tabBarLabel: 'Feature Job',
             },
         },
     }, {
@@ -47,12 +47,11 @@ const TabHomeScreen = createStackNavigator(
         TabScreen: {
             screen: TabScreen,
             navigationOptions: {
-                header:null,
+                header: null,
             },
         },
     },
 );
-
 
 
 export default createAppContainer(TabHomeScreen);
