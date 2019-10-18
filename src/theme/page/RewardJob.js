@@ -15,7 +15,6 @@ export default class RewardJob extends Component {
         return fetch('https://devjob.co/api/home?token=0F405C9DD1DE1021140B07B8CE534693')
             .then((response) => response.json())
             .then((responseJson) => {
-                    console.log(responseJson);
                     this.setState({
                         isLoading: false,
                         dataSource: responseJson.jobs_reward.map(e=>{
