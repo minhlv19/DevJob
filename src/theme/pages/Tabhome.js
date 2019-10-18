@@ -3,6 +3,8 @@ import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
 import FeatureJob from './/FeatureJob';
 import RewardJob from './/RewardJob';
+import RewardDetail from "../details/Reward_detail";
+
 
 const TabScreen = createMaterialTopTabNavigator(
     {
@@ -50,6 +52,12 @@ const TabHomeScreen = createStackNavigator(
                 header: null,
             },
         },
+        RewardDetail:{
+            screen:RewardDetail,
+            // navigationOptions: {
+            //     header: null,
+            // },
+        }
     },
 );
 

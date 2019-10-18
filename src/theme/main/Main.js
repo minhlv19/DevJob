@@ -8,6 +8,8 @@ import BlogScreen from '../menu/BlogScreen';
 import MoreScreen from '../menu/MoreScreen';
 import CompaniesScreen from '../menu/CompaniesScreen';
 import JobsScreen from '../menu/JobsScreen';
+import RewardDetail from "../details/Reward_detail";
+
 
 
 
@@ -19,6 +21,13 @@ const HomeStack = createStackNavigator(
                 header: null,
             },
         },
+        RewardDetail:{
+            screen:RewardDetail,
+            // navigationOptions: {
+            //     header: null,
+            // },
+        }
+
 
 
     },
@@ -174,7 +183,7 @@ const Menu = createBottomTabNavigator(
 
 
         }),
-        initialRouteName: 'More',
+        initialRouteName: 'Home',
         tabBarOptions: {
 
             activeTintColor: '#0a11f0'
@@ -190,6 +199,7 @@ const Mian = createStackNavigator(
                 header: null,
             },
         },
+
 
     },
     {initialRouteName: 'Menu', headerLayoutPreset: 'center'},
