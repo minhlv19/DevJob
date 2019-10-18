@@ -7,6 +7,7 @@ class EventMore extends Component {
         )
             .then(response => response.json())
             .then(responseJson => {
+                console.log(responseJson);
                 this.setState({
                     refreshing: false,
                     //Setting the data source for the list to render

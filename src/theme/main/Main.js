@@ -8,6 +8,10 @@ import BlogScreen from '../menu/BlogScreen';
 import MoreScreen from '../menu/MoreScreen';
 import CompaniesScreen from '../menu/CompaniesScreen';
 import JobsScreen from '../menu/JobsScreen';
+import RewardDetail from "../details/Reward_detail";
+
+
+
 
 const HomeStack = createStackNavigator(
     {
@@ -17,6 +21,13 @@ const HomeStack = createStackNavigator(
                 header: null,
             },
         },
+        RewardDetail:{
+            screen:RewardDetail,
+            // navigationOptions: {
+            //     header: null,
+            // },
+        }
+
 
 
     },
@@ -180,6 +191,7 @@ const Menu = createBottomTabNavigator(
         },
     },
 );
+
 const Mian = createStackNavigator(
     {
         Menu: {
@@ -187,6 +199,8 @@ const Mian = createStackNavigator(
                 header: null,
             },
         },
+
+
     },
     {initialRouteName: 'Menu', headerLayoutPreset: 'center'},
 );

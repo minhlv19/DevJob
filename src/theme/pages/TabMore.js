@@ -2,7 +2,7 @@ import {createAppContainer,} from 'react-navigation';
 import {createMaterialTopTabNavigator,} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
 import EventMore from './EventMore';
-import Course from './Course';
+import CourseMore from './CourseMore';
 const TabScreen = createMaterialTopTabNavigator(
     {
         EvenMore: {
@@ -13,7 +13,7 @@ const TabScreen = createMaterialTopTabNavigator(
 
         },
         Course: {
-            screen: Course,
+            screen: CourseMore,
             navigationOptions:{
                 tabBarLabel:"Course",
             },

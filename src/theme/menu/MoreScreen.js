@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import TabMoreScreen from '../page/TabMore';
+import TabMoreScreen from '../pages/TabMore';
 class MoreScreen extends Component {
     render() {
         return (
