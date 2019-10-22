@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {ActivityIndicator, FlatList, Image, RefreshControl, StyleSheet, Text, View} from 'react-native';
-import {diff} from 'react-native-reanimated';
+
 import {mini, small_bold} from '../../asset/styles/styleText';
 
 class JobsScreen extends Component {
