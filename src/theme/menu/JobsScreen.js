@@ -1,7 +1,17 @@
 import React, {Component} from 'react';
-import {ActivityIndicator, FlatList, Image, RefreshControl, StyleSheet, Text, View} from 'react-native';
+import {
+    ActivityIndicator,
+    FlatList,
+    Image,
+    RefreshControl,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
+} from 'react-native';
 
 import {mini, small_bold} from '../../asset/styles/styleText';
+import RewardDetail from "../details/Reward_detail";
 
 class JobsScreen extends Component {
     constructor(props) {
@@ -59,13 +69,15 @@ class JobsScreen extends Component {
 
         return (
 
+
             <View style={styles.container}>
                 <FlatList
 
                     data={this.state.dataSource}
 
                     keyExtractor={(item, index) => index.toString()}
-                    renderItem={({item}) => <View style={styles.content}>
+                    renderItem={({item}) => <TouchableOpacity onPress={()=>this.props.navigation.navigate('RewardDetail',{item:item})}
+                        style={styles.content}>
 
                         <View style={styles.item_container} onPress={()=> {
                             console.log('ahihi');
@@ -112,7 +124,7 @@ class JobsScreen extends Component {
                             </View>
 
                         </View>
-                    </View>}
+                    </TouchableOpacity>}
                     refreshControl={
                         <RefreshControl
                             //refresh control used for the Pull to Refresh

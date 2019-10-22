@@ -10,7 +10,17 @@ import CompaniesScreen from '../menu/CompaniesScreen';
 import JobsScreen from '../menu/JobsScreen';
 import RewardDetail from "../details/Reward_detail";
 
+const DetailStack = createStackNavigator(
+    {
+        RewardDetail: {
+            screen: RewardDetail,
+            navigationOptions: {
+                header: null,
+            },
+        },
 
+    },
+);
 
 
 const HomeStack = createStackNavigator(
@@ -20,13 +30,8 @@ const HomeStack = createStackNavigator(
             navigationOptions: {
                 header: null,
             },
+
         },
-        RewardDetail:{
-            screen:RewardDetail,
-            // navigationOptions: {
-            //     header: null,
-            // },
-        }
 
 
 
@@ -62,6 +67,12 @@ const JobsStack = createStackNavigator(
                 header: null,
             },
         },
+        Detail:{
+            screen:DetailStack,
+            navigationOptions:{
+                header:null,
+            }
+        },
     },
 );
 const MoreStack = createStackNavigator(
@@ -86,9 +97,7 @@ const Menu = createBottomTabNavigator(
         },
         Home: {
             screen: HomeStack,
-            navigationOptions:{
-
-            }
+            navigationOptions: {}
         },
         More: {
             screen: MoreStack,
@@ -198,6 +207,13 @@ const Mian = createStackNavigator(
             screen: Menu, navigationOptions: {
                 header: null,
             },
+        },
+
+        Detail:{
+            screen:DetailStack,
+            navigationOptions:{
+                header:null,
+            }
         },
 
 
