@@ -1,4 +1,3 @@
-
 import React, {Component} from 'react';
 
 //This is an example code for React Native Swipe Down  to Refresh ListView Using RefreshControl//
@@ -15,19 +14,19 @@ import {
     SafeAreaView,
 } from 'react-native';
 
-import Timeago from '../page/time';
-import {getdatablog} from '../../service/api';
+import Timeago from '../pages/time';
 import {mini, small_bold} from '../../asset/styles/styleText';
 import Moment from 'react-moment';
+
 //import all the components we are going to use.
-class BlogScreen extends Component  {
+class BlogScreen extends Component {
     constructor(props) {
         super(props);
         //True to show the loader
         this.state = {
             isLoading: true,
             refreshing: true,
-            dataSource:null,
+            dataSource: [],
         };
 
         //Running the getData Service for the first time
@@ -36,13 +35,27 @@ class BlogScreen extends Component  {
     }
 
     componentDidMount() {
-        getdatablog()
-            .then((data) => {
-                this.setState({
-                    isLoading: false,
-                    dataSource: data
-                });
-            })
+        return fetch('https://devjob.co/api/blog?token=0F405C9DD1DE1021140B07B8CE534693')
+            .then((response) => response.json())
+            .then((responseJson) => {
+                    console.log(responseJson);
+
+                    this.setState({
+                        refreshing: false,
+                        dataSource: responseJson.blogs.data,
+
+
+                    }, function () {
+
+                    });
+
+                },
+            )
+            .catch((error) => {
+                console.error(error);
+            });
+
+
     }
 
     ListViewItemSeparator = () => {
@@ -78,7 +91,7 @@ class BlogScreen extends Component  {
         return (
             //Returning the ListView
 
-            <SafeAreaView style={{flex:1}}>
+            <SafeAreaView style={{flex: 1}}>
                 <View style={styles.MainContainer}>
 
                     <FlatList
@@ -94,7 +107,7 @@ class BlogScreen extends Component  {
                                 <Image style={styles.logoimage} source={{uri: item.avatar_blog}}></Image>
 
                                 <View style={styles.body}>
-                                    <Text style={styles.title}  onPress={() => alert(item.id)}>
+                                    <Text style={styles.title} onPress={() => alert(item.id)}>
                                         {item.title}
                                     </Text>
                                     <View style={styles.styleicon}>
@@ -107,7 +120,8 @@ class BlogScreen extends Component  {
                                     </View>
 
                                     <View style={styles.styleicon}>
-                                        <Image source={require('../../asset/image/location.png')} style={styles.imageitem}/>
+                                        <Image source={require('../../asset/image/location.png')}
+                                               style={styles.imageitem}/>
                                         <Text>{item.viewCount}
                                         </Text>
 
@@ -131,6 +145,7 @@ class BlogScreen extends Component  {
         );
     }
 }
+
 const styles = StyleSheet.create({
     MainContainer: {
         justifyContent: 'center',

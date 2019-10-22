@@ -5,7 +5,7 @@ import {Text} from 'react-native';
 class Time extends Component {
     constructor(props){
         super(props);
-        this.date=props.time;
+        this.date=('YYYY-MM-DD HH:mm:ss');
     }
     render() {
         const time=moment(this.date||moment.now()).fromNow();
