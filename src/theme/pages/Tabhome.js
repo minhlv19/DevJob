@@ -54,9 +54,10 @@ const TabHomeScreen = createStackNavigator(
         },
         RewardDetail:{
             screen:RewardDetail,
-            // navigationOptions: {
-            //     header: null,
-            // },
+            navigationOptions: {
+                header: null,
+                bottomnavigation:null
+            },
         }
     },
 );
