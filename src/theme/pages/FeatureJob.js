@@ -11,7 +11,6 @@ import {
     View,
     Alert,
     RefreshControl,
-    SafeAreaView,
 } from 'react-native';
 import {concat} from 'react-native-reanimated';
 import {mini, small_bold} from '../../asset/styles/styleText';
@@ -87,7 +86,7 @@ export default class FeatureJob extends Component {
         }
         return (
             //Returning the ListView
-            <SafeAreaView style={{flex:1}}>
+
             <View style={styles.MainContainer}>
 
                 <FlatList
@@ -98,11 +97,11 @@ export default class FeatureJob extends Component {
                     renderItem={({item}) => (
                         <View
                             style={styles.rowViewContainer}
-                           >
+                            onPress={() => alert(item.id)}>
                             <Image style={styles.logoimage} source={{uri: item.logo}}></Image>
 
                             <View style={styles.body}>
-                                <Text style={styles.title}  onPress={() => alert(item.id)}>
+                                <Text style={styles.title}>
                                     {item.title}
                                 </Text>
                                 <View style={styles.styleicon}>
@@ -137,7 +136,6 @@ export default class FeatureJob extends Component {
                     }
                 />
             </View>
-            </SafeAreaView>
         );
     }
 }

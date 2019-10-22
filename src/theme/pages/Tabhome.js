@@ -14,6 +14,7 @@ const TabScreen = createMaterialTopTabNavigator(
                 tabBarLabel: 'Reward Job',
             },
 
+
         },
         FeatureJob: {
             screen: FeatureJob,
@@ -56,7 +57,7 @@ const TabHomeScreen = createStackNavigator(
             screen:RewardDetail,
             navigationOptions: {
                 header: null,
-                bottomnavigation:null
+
             },
         }
     },
