@@ -13,3 +13,5 @@ let blogs= await result.json();
 
     }
 }
+console.log(getdatablog());
+getdatablog();

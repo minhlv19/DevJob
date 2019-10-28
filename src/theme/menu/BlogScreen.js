@@ -11,9 +11,9 @@ import {
     View,
     Alert,
     RefreshControl,
-    SafeAreaView,
+    SafeAreaView, TouchableOpacity,
 } from 'react-native';
-import Timeago from '../pages/time'
+import Timeago from '../pages/time';
 import {mini, small_bold} from '../../asset/styles/styleText';
 import Moment from 'react-moment';
 
@@ -98,38 +98,37 @@ class BlogScreen extends Component {
                         keyExtractor={(item, index) => index.toString()}
                         ItemSeparatorComponent={this.ListViewItemSeparator}
                         enableEmptySections={true}
-                        renderItem={({item}) => (
-
+                        renderItem={({item}) =>  < TouchableOpacity style={styles.content} onPress={() => this.props.navigation.navigate('BlogDetail', {item: item})}>
                             <View
                                 style={styles.rowViewContainer}
                             >
                                 <Image style={styles.logoimage} source={{uri: item.avatar_blog}}></Image>
 
                                 <View style={styles.body}>
-                                    <Text style={styles.title} onPress={() => alert(item.id)}>
+                                    <Text style={styles.title}>
                                         {item.title}
                                     </Text>
-                                    <Text style={{paddingTop:2,}}>{item.contentShortCut}</Text>
+                                    <Text style={{paddingTop: 2}}>{item.contentShortCut}</Text>
                                     <View style={styles.styleicon}>
-                                        <Image source={require('../../asset/image/calendar_50px.png')}
-                                               style={styles.imageitem}/>
-                                        <Text style={styles.textname}>
-                                            <Timeago date={item.created_at}/>
-                                        </Text>
+                                        <View style={styles.styleicon}>
+                                            <Image source={require('../../asset/image/calendar_50px.png')}
+                                                   style={styles.imageitem}/>
+
+                                            <Text style={styles.textname}>
+                                                <Timeago date={item.created_at}/>
+                                            </Text>
+                                        </View>
+                                        <View style={styles.styleicon}>
+                                            <Image source={require('../../asset/image/view.png')}
+                                                   style={styles.imageitem}/>
+                                            <Text style={styles.textname}>{item.viewCount}
+                                            </Text>
+                                        </View>
                                     </View>
-
-                                    <View style={styles.styleicon}>
-                                        <Image source={require('../../asset/image/location.png')}
-                                               style={styles.imageitem}/>
-                                        <Text>{item.viewCount}
-                                        </Text>
-
-                                    </View>
-
                                 </View>
                             </View>
 
-                        )}
+                        </TouchableOpacity> }
 
                         refreshControl={
                             <RefreshControl
@@ -174,7 +173,7 @@ const styles = StyleSheet.create({
     styleicon: {
         marginTop: 6,
         flexDirection: 'row',
-        alignItems: 'center',
+    flex:1,
 
     },
     imageitem: {
@@ -186,6 +185,7 @@ const styles = StyleSheet.create({
         width: '88%',
         writingDirection: 'auto',
         ...mini,
+        marginLeft: 4,
     },
     skill: {
         width: '22%',
