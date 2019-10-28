@@ -14,7 +14,6 @@ import {
     SafeAreaView,
 } from 'react-native';
 
-import Timeago from '../pages/time';
 import {mini, small_bold} from '../../asset/styles/styleText';
 import Moment from 'react-moment';
 
@@ -110,12 +109,11 @@ class BlogScreen extends Component {
                                     <Text style={styles.title} onPress={() => alert(item.id)}>
                                         {item.title}
                                     </Text>
+                                    <Text>{item.contentShortCut}</Text>
                                     <View style={styles.styleicon}>
                                         <Image source={require('../../asset/image/companyitem.png')}
                                                style={styles.imageitem}/>
                                         <Text style={styles.textname}>
-
-                                            <Timeago time>{item.created_at}</Timeago>
                                         </Text>
                                     </View>
 
