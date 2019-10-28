@@ -11,11 +11,14 @@ import {
     Button
 } from "react-native";
 import HTML from "react-native-render-html";
+import { Header } from 'react-native-elements';
 
 
-class RewardDetail extends Component {
 
 
+
+
+class JobDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,20 +29,25 @@ class RewardDetail extends Component {
         this.componentDidMount();
 
     }
-
-    componentDidMount() {
-        console.log(this.props.navigation.getParam('item'), 'item sang')
+    static navigationOptions = ({ navigation }) => {
+        return {
+            title: navigation.getParam('item', 'title'),
+        };
+    };
+    componentDidMount(){
         const slug = this.props.navigation.getParam('item').slug;
         fetch(`https://devjob.co/api/job/detail?slug=${slug}&token=0F405C9DD1DE1021140B07B8CE534693`)
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log(responseJson, 'aaaaa');
-
                 this.setState({
                     data: responseJson.detail,
                     data1: responseJson.company,
 
                 });
+
+
+
 
 
             }, function () {
@@ -50,8 +58,8 @@ class RewardDetail extends Component {
             });
 
 
-    }
 
+    }
 
     render() {
         if (this.state.loading) {
@@ -63,23 +71,21 @@ class RewardDetail extends Component {
         }
 
         return (
-
+            <View>
+                <Header
+                    placement="left"
+                    leftComponent={{ icon: 'menu', color: '#fff' }}
+                    centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
+                    rightComponent={{ icon: 'home', color: '#fff' }}
+                />
+<ScrollView>
             <View style={styles.container}>
-                <View style={styles.header}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('RewardJob')}>
-                        <Image source={require('../../asset/image/back.png')}
-                               style={{width: 20, height: 20, marginLeft: 10}}/>
-                    </TouchableOpacity>
-                    <View style={{justifyContent: 'center', textAlign: 'center', alignItems: 'center', flex: 2}}>
-                        <Text>{this.state.data.title}</Text>
-                    </View>
 
-                </View>
-                <ScrollView>
+
                     <View>
                         <Text>Job OverView</Text>
-                            <View>
-                                <View style={{flexDirection:'row',marginTop:5}}>
+                        <View>
+                            <View style={{flexDirection:'row',marginTop:5}}>
 
                                 <View style={styles.customoverview}>
                                     <Image source={require('../../asset/image/bonus_item.png')} style={styles.imageitem}/>
@@ -95,8 +101,8 @@ class RewardDetail extends Component {
                                         <Text>{this.state.data.salary_min} - {this.state.data.salary_max}</Text>
                                     </View>
                                 </View>
-                                </View>
-                                <View style={{flexDirection:'row',marginTop:5}}>
+                            </View>
+                            <View style={{flexDirection:'row',marginTop:5}}>
                                 <View style={styles.customoverview}>
                                     <Image source={require('../../asset/image/rank_item.png')} style={styles.imageitem}/>
                                     <View style={{marginLeft:10}}>
@@ -112,8 +118,8 @@ class RewardDetail extends Component {
                                         <Text>{this.state.data1.name}</Text>
                                     </View>
                                 </View>
-                                </View>
-                                <View style={{flexDirection:'row',marginTop:5}}>
+                            </View>
+                            <View style={{flexDirection:'row',marginTop:5}}>
                                 <View style={styles.customoverview}>
                                     <Image source={require('../../asset/image/location.png')} style={styles.imageitem}/>
                                     <View style={{marginLeft:10,width:'80%'}}>
@@ -121,41 +127,44 @@ class RewardDetail extends Component {
                                         <Text >{this.state.data.address}</Text>
                                     </View>
                                 </View>
-                                </View>
                             </View>
-                            <View>
-                                <Text>Job Type</Text>
-                                <View style={{marginLeft:10,marginRight:10,whiteSpace: 'pre-wrap'}}>
-                                    <Text>Job Description</Text>
+                        </View>
+                        <View>
+                            <Text>Job Type</Text>
+                            <View style={{marginLeft:10,marginRight:10,whiteSpace: 'pre-wrap'}}>
+                                <Text>Job Description</Text>
                                 <HTML
                                     style={{marginLeft:10,marginRight:10,whiteSpace: 'pre-wrap'}}
                                     html={this.state.data.description}
                                 />
-                                </View>
-                                <View style={{marginLeft:10,marginRight:10,whiteSpace: 'pre-wrap'}}>
-                                    <Text>Job Description</Text>
-                                    <HTML
-                                        style={{marginLeft:10,marginRight:10,whiteSpace: 'pre-wrap'}}
-                                        html={this.state.data.requirement}
-                                    />
-                                </View>
-                                <View style={{marginLeft:10,marginRight:10,whiteSpace: 'pre-wrap',marginBottom:10}}>
-                                    <Text>Job Description</Text>
-                                    <HTML
-                                        style={{marginLeft:10,marginRight:10,whiteSpace: 'pre-wrap'}}
-                                        html={this.state.data.benefit}
-                                    />
-                                </View>
-
                             </View>
+                            <View style={{marginLeft:10,marginRight:10,whiteSpace: 'pre-wrap'}}>
+                                <Text>Job Description</Text>
+                                <HTML
+                                    style={{marginLeft:10,marginRight:10,whiteSpace: 'pre-wrap'}}
+                                    html={this.state.data.requirement}
+                                />
+                            </View>
+                            <View style={{marginLeft:10,marginRight:10,whiteSpace: 'pre-wrap',marginBottom:10}}>
+                                <Text>Job Description</Text>
+                                <HTML
+                                    style={{marginLeft:10,marginRight:10,whiteSpace: 'pre-wrap'}}
+                                    html={this.state.data.benefit}
+                                />
+                            </View>
+
+                        </View>
                         <TouchableOpacity>
                             <Button title="Apply"/>
                             <Button title="Save"/>
+                            <Button title="Save"/>
                         </TouchableOpacity>
                     </View>
-                </ScrollView>
 
 
+
+            </View>
+    </ScrollView>
             </View>
         );
 
@@ -183,37 +192,7 @@ const styles = StyleSheet.create({
         width:40,
         height: 40
     }
-    // Header: {
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     position: 'absolute',
-    //     left: 0,
-    //     right: 0,
-    //     top: Platform.OS == 'ios' ? 20 : 0,
-    // },
-    // HeaderInsideText: {
-    //     color: '#fff',
-    //     fontSize: 18,
-    //     textAlign: 'center',
-    // },
-    // TextViewStyle: {
-    //     textAlign: 'center',
-    //     color: '#000',
-    //     fontSize: 18,
-    //     margin: 5,
-    //     padding: 7,
-    // },
-    // iconback: {
-    //     width: 20,
-    //     height: 20,
-    //     marginLeft: 20
-    // },
-    // leftheader:{
-    //
-    //     width:10,
-    //     height:10
-    // }
+
 });
 
-
-export default RewardDetail
+export default JobDetail
