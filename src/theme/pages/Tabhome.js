@@ -42,7 +42,17 @@ const TabScreen = createMaterialTopTabNavigator(
         },
     },
 );
+const DetailStack = createStackNavigator(
+    {
+        RewardDetail: {
+            screen: RewardDetail,
+            navigationOptions: {
+                header: null,
+            },
+        },
 
+    },
+);
 
 const TabHomeScreen = createStackNavigator(
     {
@@ -54,7 +64,7 @@ const TabHomeScreen = createStackNavigator(
             },
         },
         RewardDetail:{
-            screen:RewardDetail,
+            screen:DetailStack,
             navigationOptions: {
                 header: null,
 
