@@ -11,9 +11,9 @@ import {
     Button
 } from "react-native";
 import HTML from "react-native-render-html";
+import Timeago from '../pages/time';
 
-
-export default class  BlogDetail extends Component {
+export default class BlogDetail extends Component {
 
 
     constructor(props) {
@@ -30,14 +30,14 @@ export default class  BlogDetail extends Component {
     componentDidMount() {
         console.log(this.props.navigation.getParam('item'), 'item sang')
         const slug = this.props.navigation.getParam('item').slug;
-        fetch(`https://devjob.co/api/job/detail?slug=${slug}&token=0F405C9DD1DE1021140B07B8CE534693`)
+        fetch(`https://devjob.co/api/blog/blog-detail?token=0F405C9DD1DE1021140B07B8CE534693&slug=${slug}`)
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log(responseJson, 'aaaaa');
 
                 this.setState({
-                    data: responseJson.detail,
-                    data1: responseJson.company,
+                    data: responseJson.blog,
+
 
                 });
 
@@ -66,7 +66,7 @@ export default class  BlogDetail extends Component {
 
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('RewardJob')}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Blog')}>
                         <Image source={require('../../asset/image/back.png')}
                                style={{width: 20, height: 20, marginLeft: 10}}/>
                     </TouchableOpacity>
@@ -76,38 +76,14 @@ export default class  BlogDetail extends Component {
 
                 </View>
                 <ScrollView>
-                    <View>
-
                         <View>
-                            <Text>Job Type</Text>
                             <View style={{marginLeft:10,marginRight:10,whiteSpace: 'pre-wrap'}}>
-                                <Text>Job Description</Text>
                                 <HTML
                                     style={{marginLeft:10,marginRight:10,whiteSpace: 'pre-wrap'}}
-                                    html={this.state.data.description}
+                                    html={this.state.data.content}
                                 />
                             </View>
-                            <View style={{marginLeft:10,marginRight:10,whiteSpace: 'pre-wrap'}}>
-                                <Text>Job Description</Text>
-                                <HTML
-                                    style={{marginLeft:10,marginRight:10,whiteSpace: 'pre-wrap'}}
-                                    html={this.state.data.requirement}
-                                />
-                            </View>
-                            <View style={{marginLeft:10,marginRight:10,whiteSpace: 'pre-wrap',marginBottom:10}}>
-                                <Text>Job Description</Text>
-                                <HTML
-                                    style={{marginLeft:10,marginRight:10,whiteSpace: 'pre-wrap'}}
-                                    html={this.state.data.benefit}
-                                />
-                            </View>
-
                         </View>
-                        <TouchableOpacity>
-                            <Button title="Apply"/>
-                            <Button title="Save"/>
-                        </TouchableOpacity>
-                    </View>
                 </ScrollView>
 
 
@@ -137,7 +113,17 @@ const styles = StyleSheet.create({
     imageitem:{
         width:40,
         height: 40
-    }
+    },
+    content: {
+        flexDirection: 'row',
+        backgroundColor: '#ffffff',
+        borderWidth: 1,
+        borderRadius: 6,
+        marginBottom: 5,
+        padding: 4,
+        marginLeft: 2,
+        marginRight: 2,
 
+    },
 });
 

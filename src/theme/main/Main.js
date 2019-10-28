@@ -10,6 +10,7 @@ import CompaniesScreen from '../menu/CompaniesScreen';
 import JobsScreen from '../menu/JobsScreen';
 import RewardDetail from "../details/Reward_detail";
 import JobDetail from "../details/Job_detail";
+import BlogDetail from '../details/BlogDetail';
 
 
 
@@ -18,6 +19,16 @@ const JobdetailStack=createStackNavigator(
     {
         Detailjob:{
             screen:JobDetail,
+            navigationOptions:{
+                header:null,
+            }
+        }
+    }
+);
+const BlogDetailStack=createStackNavigator(
+    {
+        BlogDetail:{
+            screen:BlogDetail,
             navigationOptions:{
                 header:null,
             }
@@ -217,6 +228,12 @@ const Mian = createStackNavigator(
             screen:JobdetailStack,
             navigationOptions:{
 header:null
+            }
+        },
+        Detail_Blog:{
+            screen:BlogDetailStack,
+            navigationOptions:{
+                header:null
             }
         },
         Home: {
