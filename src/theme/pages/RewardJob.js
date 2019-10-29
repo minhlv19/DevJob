@@ -7,7 +7,7 @@ import {
     Image,
     StyleSheet,
     RefreshControl,
-    TouchableOpacity
+    TouchableOpacity,
 } from 'react-native';
 import {Card} from 'react-native-elements';
 import {mini, small_bold} from '../../asset/styles/styleText';
@@ -57,6 +57,7 @@ export default class RewardJob extends Component {
 
 
     }
+
     onRefresh() {
         //Clear old data of the list
         this.setState({dataSource: []});
@@ -84,9 +85,10 @@ export default class RewardJob extends Component {
                     data={this.state.dataSource}
 
                     keyExtractor={(item, index) => index.toString()}
-                    renderItem={({item}) => < TouchableOpacity style={styles.content} onPress={()=>this.props.navigation.navigate('RewardDetail',{item:item})}>
+                    renderItem={({item}) => < TouchableOpacity style={styles.content}
+                                                               onPress={() => this.props.navigation.navigate('RewardDetail', {item: item})}>
 
-                        <View style={styles.item_container} onPress={()=> {
+                        <View style={styles.item_container} onPress={() => {
                             console.log('ahihi');
                         }}>
                             <Image
@@ -201,11 +203,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    logo:{
+    logo: {
         width: 100,
         height: 80,
-        alignItems: 'center'
-    }
+        alignItems: 'center',
+    },
 });
 
 

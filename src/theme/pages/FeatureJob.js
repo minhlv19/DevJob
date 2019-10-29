@@ -10,7 +10,7 @@ import {
     Text,
     View,
     Alert,
-    RefreshControl, TouchableOpacity,
+    RefreshControl,
 } from 'react-native';
 import {concat} from 'react-native-reanimated';
 import {mini, small_bold} from '../../asset/styles/styleText';
@@ -95,9 +95,9 @@ export default class FeatureJob extends Component {
                     ItemSeparatorComponent={this.ListViewItemSeparator}
                     enableEmptySections={true}
                     renderItem={({item}) => (
-                        <TouchableOpacity
+                        <View
                             style={styles.rowViewContainer}
-                            onPress={()=>this.props.navigation.navigate('RewardDetail',{item:item})}>
+                            onPress={() => alert(item.id)}>
                             <Image style={styles.logoimage} source={{uri: item.logo}}></Image>
 
                             <View style={styles.body}>
@@ -123,7 +123,7 @@ export default class FeatureJob extends Component {
                                     {item.skills.map(e => <Text style={styles.skill} key={e.name}>{e.name}</Text>)}
                                 </View>
                             </View>
-                        </TouchableOpacity>
+                        </View>
 
                     )}
 

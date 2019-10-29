@@ -76,7 +76,7 @@ class JobsScreen extends Component {
                     data={this.state.dataSource}
 
                     keyExtractor={(item, index) => index.toString()}
-                    renderItem={({item}) => <TouchableOpacity onPress={()=>this.props.navigation.navigate('Detail_job',{item:item})}
+                    renderItem={({item}) => <TouchableOpacity onPress={()=>this.props.navigation.navigate('RewardDetail',{item:item})}
                         style={styles.content}>
 
                         <View style={styles.item_container} onPress={()=> {
@@ -124,7 +124,6 @@ class JobsScreen extends Component {
                             </View>
 
                         </View>
-
                     </TouchableOpacity>}
                     refreshControl={
                         <RefreshControl
